@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/mm"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.process.ProcessActivity"
+    tools:showIn="@layout/activity_process">
+
+    <RelativeLayout
+        style="@style/mm">
+
+        <ProgressBar
+            android:id="@+id/process_progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateOnly="true"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/process_textViewAmount"
+            style="@style/ww"
+            android:layout_below="@id/process_progressBar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_M"
+            android:text="@string/lorem_1word"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+
+        <TextView
+            android:id="@+id/process_textViewExplain"
+            style="@style/ww"
+            android:layout_below="@id/process_textViewAmount"
+            android:layout_marginLeft="@dimen/margin_l"
+            android:layout_marginRight="@dimen/margin_l"
+            android:layout_marginTop="@dimen/margin_M"
+            android:text="@string/lorem_15word"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+        <LinearLayout
+            android:id="@+id/process_layoutBottom"
+            style="@style/mw.hori"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:padding="@dimen/padding_S">
+
+            <ImageButton
+                android:id="@+id/process_btnBack"
+                style="@style/ww"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:background="@null"
+                android:onClick="back"
+                android:src="@drawable/baseline_arrow_back_ios_black_36"
+                android:tint="@color/accent"/>
+
+            <LinearLayout
+                style="@style/ww.hori"
+                android:layout_width="0dp"
+                android:layout_weight="6"
+                android:background="@null">
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/process_btnNext"
+                style="@style/ww"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:background="@null"
+                android:onClick="next"
+                android:src="@drawable/baseline_arrow_forward_ios_black_36"
+                android:tint="@color/accent"/>
+
+        </LinearLayout>
+
+        <jkvillavo.co.com.paymentapp.ui.process.viewpager.NoSwipeViewPager
+            android:id="@+id/process_viewPager"
+            style="@style/mm"
+            android:layout_above="@+id/process_layoutBottom"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/process_textViewExplain"
+            android:layout_margin="@dimen/margin_S"/>
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

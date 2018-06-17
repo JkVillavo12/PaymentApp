@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="radius_S">4dp</dimen>
+    <dimen name="radius_M">8dp</dimen>
+    <dimen name="radius_L">16dp</dimen>
+    <dimen name="radius_XL">32dp</dimen>
+    <dimen name="radius_XXL">64dp</dimen>
+
+    <dimen name="elevation_XS">2dp</dimen>
+    <dimen name="elevation_S">4dp</dimen>
+
+    <dimen name="margin_XS">4dp</dimen>
+    <dimen name="margin_S">4dp</dimen>
+    <dimen name="margin_M">8dp</dimen>
+    <dimen name="margin_l">16dp</dimen>
+    <dimen name="margin_Xl">32dp</dimen>
+    <dimen name="margin_XXl">64dp</dimen>
+
+    <dimen name="padding_S">4dp</dimen>
+    <dimen name="padding_M">8dp</dimen>
+    <dimen name="padding_L">16dp</dimen>
+    <dimen name="padding_Xl">32dp</dimen>
+
+    <dimen name="line_XS">1dp</dimen>
+    <dimen name="line_S">2dp</dimen>
+    <dimen name="line_M">4dp</dimen>
+    <dimen name="line_L">8dp</dimen>
+    <dimen name="line_XL">16dp</dimen>
+
+    <dimen name="line_height_M">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="icon_Height">36dp</dimen>
+    <dimen name="icon_Height_S">24dp</dimen>
+
+</resources>

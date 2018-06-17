@@ -1,0 +1,40 @@
+<resources>
+
+    <string name="app_name">PaymentApp</string>
+
+    <string name="transition_mercadoLibre">mercadoLibre</string>
+
+    <string name="button_pagar">Pagar</string>
+    <string name="button_back">Atras</string>
+    <string name="button_next">Siguiente</string>
+
+    <string name="text_enterValue">Ingresa un monto</string>
+    <string name="text_installments">Cuotas</string>
+    <string name="text_amount">Valor de la compra: $%1$s</string>
+
+    <string name="text_payment">Medio de pago</string>
+    <string name="text_bank">Banco</string>
+
+    <string name="msg_presentation">Esto es una prueba realizada por Juan Carlos Martínez Orjuela para Mercado Libre - Chile.</string>
+    <string name="msg_fieldMandatory">Este campo es requerido.</string>
+    <string name="msg_titlePaymentMethod">Por favor selecciona un medio de pago.</string>
+    <string name="msg_paymentMethodMandatory">Selecciona uno de los medios de pago disponibles</string>
+    <string name="msg_titleBank">Por favor selecciona el banco de tu medio de pago.</string>
+    <string name="msg_titleInstallments">Por favor selecciona el número de cuotas para la compra.</string>
+    <string name="msg_loading">Consultando información...</string>
+    <string name="msg_notData">No hay información para mostrar</string>
+    <string name="msg_errorBackend">Ha ocurrido un error en la consulta de la información.</string>
+    <string name="msg_noInstallments">No se encontró información del método de pago y sus cuotas.</string>
+
+    <string name="lorem_1word">Lorem</string>
+    <string name="lorem_15word">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod lectus et magna sollicitudin, eget.</string>
+
+    <string name="title_activity_process">Pago</string>
+
+    <plurals name="numberOfInstallments">
+        <item quantity="one">Cuota</item>
+        <item quantity="other">Cuotas</item>
+    </plurals>
+
+
+</resources>

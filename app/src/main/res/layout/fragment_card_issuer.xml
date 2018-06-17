@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".ui.process.fragments.cardissuer.CardIssuerFragment">
+
+    <RelativeLayout
+        style="@style/mm">
+
+        <TextView
+            android:id="@+id/cardIssuer_textViewMandatory"
+            style="@style/mw"
+            android:layout_marginTop="@dimen/margin_M"
+            android:gravity="center_horizontal"
+            android:text="@string/msg_paymentMethodMandatory"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textColor="@color/red_500"
+            android:visibility="gone"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/cardIssuer_recycler"
+            style="@style/mm"
+            android:layout_below="@id/cardIssuer_textViewMandatory"
+            android:layout_margin="@dimen/margin_M"/>
+
+        <TextView
+            android:id="@+id/cardIssuer_empty"
+            style="@style/ww"
+            android:layout_centerInParent="true"
+            android:drawableLeft="@drawable/baseline_refresh_black_24"
+            android:drawablePadding="@dimen/padding_S"
+            android:gravity="center_vertical"
+            android:text="@string/msg_loading"/>
+
+        <TextView
+            android:id="@+id/cardIssuer_notResult"
+            style="@style/ww"
+            android:layout_centerInParent="true"
+            android:drawablePadding="@dimen/padding_S"
+            android:gravity="center_vertical"
+            android:text="@string/msg_notData"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+</FrameLayout>
