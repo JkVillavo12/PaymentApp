@@ -1,5 +1,8 @@
 package jkvillavo.co.com.paymentapp.util;
 
+/**
+ * Contiene los jeys usados en Extras
+ */
 public class ExtrasKey {
 
     public static class RequestCode {

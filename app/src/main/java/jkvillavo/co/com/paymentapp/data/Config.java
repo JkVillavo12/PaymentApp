@@ -1,5 +1,8 @@
 package jkvillavo.co.com.paymentapp.data;
 
+/**
+ * Contiene los valores de configuracion para la app
+ */
 public class Config {
 
     public static class Db {

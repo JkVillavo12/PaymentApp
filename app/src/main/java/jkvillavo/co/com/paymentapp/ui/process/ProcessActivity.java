@@ -3,6 +3,9 @@ package jkvillavo.co.com.paymentapp.ui.process;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -31,18 +34,20 @@ public class ProcessActivity extends AppCompatActivity implements IContractProce
         PaymentMethodFragment.IOnCreditCardFragment, CardIssuerFragment.IOnIssuerFragment,
         InstallmentsFragment.IOnInstallmentsListener {
 
-    @BindView(R.id.process_viewPager)
+    @BindView ( R.id.process_viewPager )
     NoSwipeViewPager processViewPager;
-    @BindView(R.id.process_progressBar)
+    @BindView ( R.id.process_progressBar )
     ProgressBar processProgressBar;
-    @BindView(R.id.process_textViewExplain)
+    @BindView ( R.id.process_textViewExplain )
     TextView processTextViewExplain;
-    @BindView(R.id.process_textViewAmount)
+    @BindView ( R.id.process_textViewAmount )
     TextView processTextViewAmount;
-    @BindView(R.id.process_btnBack)
+    @BindView ( R.id.process_btnBack )
     ImageButton processBtnBack;
-    @BindView(R.id.process_btnNext)
+    @BindView ( R.id.process_btnNext )
     ImageButton processBtnNext;
+    @BindView ( R.id.process_coordinator )
+    CoordinatorLayout processCoordinator;
     private IContractProcess.Presenter presenter;
     private AdapterOnProcess adapterOnProcess;
 
@@ -52,184 +57,204 @@ public class ProcessActivity extends AppCompatActivity implements IContractProce
     private PayerCost currentPayerCost;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate ( Bundle savedInstanceState ) {
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_process);
-        ButterKnife.bind(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.activity_process );
+        ButterKnife.bind( this );
+        Toolbar toolbar = ( Toolbar ) findViewById( R.id.toolbar );
+        setSupportActionBar( toolbar );
+        getSupportActionBar().setDisplayHomeAsUpEnabled( true );
 
-        adapterOnProcess = new AdapterOnProcess(getSupportFragmentManager());
-        processViewPager.setAdapter(adapterOnProcess);
+        adapterOnProcess = new AdapterOnProcess( getSupportFragmentManager() );
+        processViewPager.setAdapter( adapterOnProcess );
 
-        presenter = new ProcessPresenter(this);
-        showBack(false);
+        presenter = new ProcessPresenter( this );
+        showBack( false );
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart () {
 
         super.onStart();
 
         setListenerViewPager();
-        changeTextExplain(UiUtils.Pages.PAGE_PAYMENTMETHOD);
+        changeTextExplain( UiUtils.Pages.PAGE_PAYMENTMETHOD );
         loadAmount();
 
     }
 
-    private void loadAmount() {
+    private void loadAmount () {
 
         presenter.loadAmount();
 
     }
 
-    private void setListenerViewPager() {
+    private void setListenerViewPager () {
 
-        processViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        processViewPager.addOnPageChangeListener( new ViewPager.OnPageChangeListener() {
 
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            public void onPageScrolled ( int position, float positionOffset, int positionOffsetPixels ) {
 
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected ( int position ) {
 
                 currentPage = position;
-                changeTextExplain(position);
+                changeTextExplain( position );
 
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
+            public void onPageScrollStateChanged ( int state ) {
 
             }
 
-        });
+        } );
 
     }
 
-    private void changeTextExplain(int position) {
+    private void changeTextExplain ( int position ) {
 
-        presenter.changeTextExplain(position);
-
-    }
-
-    public void back(View view) {
-
-        presenter.back(currentPage);
-
+        presenter.changeTextExplain( position );
 
     }
 
-    public void next(View view) {
+    public void back ( View view ) {
+
+        presenter.back( currentPage );
+
+
+    }
+
+    public void next ( View view ) {
 
         /*
             Debemos tomar el fragmento que se esta viendo y validar si el usuario hizo el proceso en
             el fragmento, si lo hizo continuamos a la siguiente pantalla
          */
-        Fragment mFragment = adapterOnProcess.getRegisteredFragment(processViewPager.getCurrentItem());
-        presenter.next(mFragment, currentPage);
+        Fragment mFragment = adapterOnProcess.getRegisteredFragment( processViewPager.getCurrentItem() );
+        presenter.next( mFragment, currentPage );
 
     }
 
     @Override
-    public void onFailure(Throwable t) {
+    public void onFailure ( Throwable t ) {
 
-        Toast.makeText(this, t.getMessage(), Toast.LENGTH_SHORT).show();
+        Toast.makeText( this, t.getMessage(), Toast.LENGTH_SHORT ).show();
     }
 
     @Override
-    public void showMessage(String msg) {
+    public void showMessage ( String msg ) {
 
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText( this, msg, Toast.LENGTH_SHORT ).show();
     }
 
     @Override
-    public void showProgress() {
+    public void showProgress () {
 
-        processProgressBar.setVisibility(View.VISIBLE);
+        processProgressBar.setVisibility( View.VISIBLE );
     }
 
     @Override
-    public void hideProgress() {
+    public void hideProgress () {
 
-        processProgressBar.setVisibility(View.GONE);
+        processProgressBar.setVisibility( View.GONE );
 
     }
 
     @Override
-    public void finishProcess() {
+    public void showSnackBarNetwork () {
+
+        final Intent intent = new Intent( Settings.ACTION_WIRELESS_SETTINGS );
+        final Snackbar snackbar = Snackbar.make( processCoordinator, getString( R.string.msg_noInternet ), Snackbar.LENGTH_LONG );
+
+        snackbar.setAction( getString( R.string.msg_configure ), new View.OnClickListener() {
+
+            @Override
+            public void onClick ( View v ) {
+
+                startActivity( intent );
+                snackbar.dismiss();
+            }
+        } );
+
+        snackbar.show();
+    }
+
+    @Override
+    public void finishProcess () {
 
         Intent returnIntent = new Intent();
-        returnIntent.putExtra(ExtrasKey.Extras.PAYMENTMETHOD_NAME, currenPayment.getName());
-        returnIntent.putExtra(ExtrasKey.Extras.PAYMENTMETHOD_IMAGE, currenPayment.getSecureThumbnail());
-        returnIntent.putExtra(ExtrasKey.Extras.ISSUER_NAME, currentIssuer.getName());
-        returnIntent.putExtra(ExtrasKey.Extras.ISSUER_IMAGE, currentIssuer.getSecureThumbnail());
-        returnIntent.putExtra(ExtrasKey.Extras.PAYERCOST, currentPayerCost.getRecommendedMessage());
+        returnIntent.putExtra( ExtrasKey.Extras.PAYMENTMETHOD_NAME, currenPayment.getName() );
+        returnIntent.putExtra( ExtrasKey.Extras.PAYMENTMETHOD_IMAGE, currenPayment.getSecureThumbnail() );
+        returnIntent.putExtra( ExtrasKey.Extras.ISSUER_NAME, currentIssuer.getName() );
+        returnIntent.putExtra( ExtrasKey.Extras.ISSUER_IMAGE, currentIssuer.getSecureThumbnail() );
+        returnIntent.putExtra( ExtrasKey.Extras.PAYERCOST, currentPayerCost.getRecommendedMessage() );
 
-        setResult(Activity.RESULT_OK, returnIntent);
+        setResult( Activity.RESULT_OK, returnIntent );
         finish();
 
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed () {
 
         Intent returnIntent = new Intent();
-        setResult(Activity.RESULT_CANCELED, returnIntent);
+        setResult( Activity.RESULT_CANCELED, returnIntent );
         finish();
 
     }
 
     @Override
-    public void selectPage(int pagePosition) {
-        processViewPager.setCurrentItem(pagePosition);
+    public void selectPage ( int pagePosition ) {
+
+        processViewPager.setCurrentItem( pagePosition );
     }
 
     @Override
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
+    public void setPaymentMethod ( PaymentMethod paymentMethod ) {
 
         currenPayment = paymentMethod;
     }
 
     @Override
-    public void setIssuer(CardIssuer cardIssuer) {
+    public void setIssuer ( CardIssuer cardIssuer ) {
 
         currentIssuer = cardIssuer;
 
     }
 
     @Override
-    public void setPayerCost(PayerCost payerCost) {
+    public void setPayerCost ( PayerCost payerCost ) {
 
         currentPayerCost = payerCost;
 
     }
 
     @Override
-    public void showAmount(String amount) {
+    public void showAmount ( String amount ) {
 
-        processTextViewAmount.setText(amount);
-
-    }
-
-    @Override
-    public void showTextExplain(String string) {
-
-        processTextViewExplain.setText(string);
+        processTextViewAmount.setText( amount );
 
     }
 
     @Override
-    public void showBack(boolean show) {
+    public void showTextExplain ( String string ) {
 
-        if (show) {
-            processBtnBack.setVisibility(View.VISIBLE);
+        processTextViewExplain.setText( string );
+
+    }
+
+    @Override
+    public void showBack ( boolean show ) {
+
+        if ( show ) {
+            processBtnBack.setVisibility( View.VISIBLE );
         } else {
-            processBtnBack.setVisibility(View.INVISIBLE);
+            processBtnBack.setVisibility( View.INVISIBLE );
         }
 
     }

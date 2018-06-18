@@ -3,10 +3,14 @@ package jkvillavo.co.com.paymentapp.ui.main;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,105 +29,144 @@ import jkvillavo.co.com.paymentapp.util.prefs.PrefsKey;
 
 public class MainActivity extends AppCompatActivity implements IContractMain.View {
 
-    @BindView(R.id.main_editTextAmount)
+    @BindView ( R.id.main_editTextAmount )
     TextInputEditText mainEditTextAmount;
-    @BindView(R.id.main_textInputAmount)
+    @BindView ( R.id.main_textInputAmount )
     TextInputLayout mainTextInputAmount;
-    @BindView(R.id.main_image)
+    @BindView ( R.id.main_image )
     ImageView mainImage;
-    @BindView(R.id.main_textPresentation)
+    @BindView ( R.id.main_textPresentation )
     TextView mainTextPresentation;
-    @BindView(R.id.main_imageAmount)
+    @BindView ( R.id.main_imageAmount )
     ImageView mainImageAmount;
-    @BindView(R.id.main_btnPay)
+    @BindView ( R.id.main_btnPay )
     Button mainBtnPay;
-    @BindView(R.id.main_circle1)
+    @BindView ( R.id.main_circle1 )
     View mainCircle1;
-    @BindView(R.id.main_paymentText)
+    @BindView ( R.id.main_paymentText )
     TextView mainPaymentText;
-    @BindView(R.id.main_paymentTextValue)
+    @BindView ( R.id.main_paymentTextValue )
     TextView mainPaymentTextValue;
-    @BindView(R.id.main_imagePayment)
+    @BindView ( R.id.main_imagePayment )
     ImageView mainImagePayment;
-    @BindView(R.id.main_circle2)
+    @BindView ( R.id.main_circle2 )
     View mainCircle2;
-    @BindView(R.id.main_issuerText)
+    @BindView ( R.id.main_issuerText )
     TextView mainIssuerText;
-    @BindView(R.id.main_issuerTextValue)
+    @BindView ( R.id.main_issuerTextValue )
     TextView mainIssuerTextValue;
-    @BindView(R.id.main_imageIssuer)
+    @BindView ( R.id.main_imageIssuer )
     ImageView mainImageIssuer;
-    @BindView(R.id.main_circle3)
+    @BindView ( R.id.main_circle3 )
     View mainCircle3;
-    @BindView(R.id.main_payerCostText)
+    @BindView ( R.id.main_payerCostText )
     TextView mainPayerCostText;
-    @BindView(R.id.main_payerCostTextValue)
+    @BindView ( R.id.main_payerCostTextValue )
     TextView mainPayerCostTextValue;
-    @BindView(R.id.main_layoutSummary)
+    @BindView ( R.id.main_layoutSummary )
     LinearLayout mainLayoutSummary;
+    @BindView ( R.id.main_coordinator )
+    CoordinatorLayout mainCoordinator;
 
     private IContractMain.Presenter presenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+    protected void onCreate ( Bundle savedInstanceState ) {
 
-        presenter = new MainPresenter(this);
-        mainLayoutSummary.setVisibility(View.GONE);
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.activity_main );
+        ButterKnife.bind( this );
+
+        presenter = new MainPresenter( this, getApplicationContext() );
+        mainLayoutSummary.setVisibility( View.GONE );
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart () {
+
         super.onStart();
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed () {
+
     }
 
-    public void pay(View view) {
+    public void pay ( View view ) {
 
         int errores = 0;
-        errores += UiUtils.validadEditTextWithTextInput(mainEditTextAmount, mainTextInputAmount, getApplicationContext());
+        errores += UiUtils.validadEditTextWithTextInput( mainEditTextAmount, mainTextInputAmount, getApplicationContext() );
 
-        if (errores > 0) {
-            long amount = Long.parseLong(mainEditTextAmount.getText().toString());
-            Prefs.save(MainActivity.this, PrefsKey.Process.AMOUNT, amount);
-            Intent intent = new Intent(MainActivity.this, ProcessActivity.class);
-            startActivityForResult(intent, ExtrasKey.RequestCode.PAY);
+        if ( errores > 0 ) {
+            presenter.pay();
         }
 
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult ( int requestCode, int resultCode, Intent data ) {
 
-        if (requestCode == ExtrasKey.RequestCode.PAY) {
+        if ( requestCode == ExtrasKey.RequestCode.PAY ) {
 
-            if (resultCode == Activity.RESULT_OK) {
+            if ( resultCode == Activity.RESULT_OK ) {
 
-                mainLayoutSummary.setVisibility(View.VISIBLE);
-                loadDataPay(data);
+                mainLayoutSummary.setVisibility( View.VISIBLE );
+                loadDataPay( data );
 
             }
-            if (resultCode == Activity.RESULT_CANCELED) {
-                mainLayoutSummary.setVisibility(View.GONE);
+            if ( resultCode == Activity.RESULT_CANCELED ) {
+                mainLayoutSummary.setVisibility( View.GONE );
             }
 
         }
 
     }
 
-    private void loadDataPay(Intent data) {
+    private void loadDataPay ( Intent data ) {
 
-        mainPaymentTextValue.setText(data.getStringExtra(ExtrasKey.Extras.PAYMENTMETHOD_NAME));
-        mainIssuerTextValue.setText(data.getStringExtra(ExtrasKey.Extras.ISSUER_NAME));
-        mainPayerCostTextValue.setText(data.getStringExtra(ExtrasKey.Extras.PAYERCOST));
+        mainPaymentTextValue.setText( data.getStringExtra( ExtrasKey.Extras.PAYMENTMETHOD_NAME ) );
+        mainIssuerTextValue.setText( data.getStringExtra( ExtrasKey.Extras.ISSUER_NAME ) );
+        mainPayerCostTextValue.setText( data.getStringExtra( ExtrasKey.Extras.PAYERCOST ) );
 
-        Glide.with(MainActivity.this).load(data.getStringExtra(ExtrasKey.Extras.PAYMENTMETHOD_IMAGE)).into(mainImagePayment);
-        Glide.with(MainActivity.this).load(data.getStringExtra(ExtrasKey.Extras.ISSUER_IMAGE)).into(mainImageIssuer);
+        Glide.with( MainActivity.this ).load( data.getStringExtra( ExtrasKey.Extras.PAYMENTMETHOD_IMAGE ) ).into( mainImagePayment );
+        Glide.with( MainActivity.this ).load( data.getStringExtra( ExtrasKey.Extras.ISSUER_IMAGE ) ).into( mainImageIssuer );
 
+    }
+
+    @Override
+    public void next () {
+
+        long amount = Long.parseLong( mainEditTextAmount.getText().toString() );
+        Prefs.save( MainActivity.this, PrefsKey.Process.AMOUNT, amount );
+        Intent intent = new Intent( MainActivity.this, ProcessActivity.class );
+        startActivityForResult( intent, ExtrasKey.RequestCode.PAY );
+
+    }
+
+    @Override
+    public void showSnackBarNetwork () {
+
+        hideKeyBoard();
+        final Intent intent = new Intent( Settings.ACTION_WIRELESS_SETTINGS );
+        final Snackbar snackbar = Snackbar.make( mainCoordinator, getString( R.string.msg_noInternet ), Snackbar.LENGTH_LONG );
+
+        snackbar.setAction( getString( R.string.msg_configure ), new View.OnClickListener() {
+
+            @Override
+            public void onClick ( View v ) {
+
+                startActivity( intent );
+                snackbar.dismiss();
+            }
+        } );
+
+        snackbar.show();
+
+    }
+
+    public void hideKeyBoard () {
+
+        InputMethodManager imm = ( InputMethodManager ) getSystemService( Activity.INPUT_METHOD_SERVICE );
+        imm.toggleSoftInput( InputMethodManager.HIDE_IMPLICIT_ONLY, 0 ); // hide
     }
 }

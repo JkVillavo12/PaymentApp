@@ -4,19 +4,34 @@ public class IContractSplash {
 
     interface View {
 
-        void nextMain();
+        /**
+         * Dirije la app a la pantalla main
+         */
+        void nextMain ();
     }
 
     interface Presenter {
 
-        void next(int i);
+        /**
+         * Logica para esperar un poco e ir a la siguiente pantalla
+         *
+         * @param i
+         *         milliseconds a esperar
+         */
+        void next ( int i );
 
-        void nextMain();
+        /**
+         * Da la orden de continuar con la siguiente pantalla
+         */
+        void nextMain ();
     }
 
     interface Model {
 
-        void next();
+        /**
+         * Modelo encargado de tomar la decision de a donde dirijir la app
+         */
+        void next ();
 
     }
 }

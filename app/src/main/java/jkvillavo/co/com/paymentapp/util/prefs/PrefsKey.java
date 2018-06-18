@@ -1,5 +1,8 @@
 package jkvillavo.co.com.paymentapp.util.prefs;
 
+/**
+ * Contiene los keys que se usan en las preferencia
+ */
 public class PrefsKey {
 
     public static class Process {

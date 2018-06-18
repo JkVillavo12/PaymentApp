@@ -51,6 +51,8 @@ public class PaymentMethodFragment extends Fragment implements IContractPaymentM
         void showProgress();
 
         void hideProgress();
+
+        void showSnackBarNetwork ();
     }
 
     public static PaymentMethodFragment newInstance() {
@@ -146,6 +148,12 @@ public class PaymentMethodFragment extends Fragment implements IContractPaymentM
     public void showProgress() {
 
         mListener.showProgress();
+    }
+
+    @Override
+    public void showSnackBarNetwork () {
+
+        mListener.showSnackBarNetwork();
     }
 
     @Override

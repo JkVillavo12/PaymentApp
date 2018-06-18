@@ -4,6 +4,9 @@ import jkvillavo.co.com.paymentapp.data.Config;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Gestiona la instancia de retrofit que es usado para el consumo de los ws
+ */
 public class RetrofitInstance {
 
     private static Retrofit retrofit;
@@ -11,12 +14,12 @@ public class RetrofitInstance {
     /**
      * Create an instance of Retrofit object
      */
-    public static Retrofit getRetrofitInstance() {
+    public static Retrofit getRetrofitInstance () {
 
-        if (retrofit == null) {
+        if ( retrofit == null ) {
             retrofit = new retrofit2.Retrofit.Builder()
-                    .baseUrl(Config.MercadoPagoApi.URL_BASE)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl( Config.MercadoPagoApi.URL_BASE )
+                    .addConverterFactory( GsonConverterFactory.create() )
                     .build();
         }
 

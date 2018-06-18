@@ -1,169 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    style="@style/mm"
-    android:layout_marginBottom="@dimen/margin_S"
-    android:layout_marginLeft="@dimen/margin_l"
-    android:layout_marginRight="@dimen/margin_l"
-    android:layout_marginTop="@dimen/margin_S"
-    android:animateLayoutChanges="true"
-    tools:context=".ui.main.MainActivity">
+<android.support.design.widget.CoordinatorLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:tools = "http://schemas.android.com/tools"
+    android:id = "@+id/main_coordinator"
+    style = "@style/mm"
+    android:layout_marginBottom = "@dimen/margin_S"
+    android:layout_marginLeft = "@dimen/margin_l"
+    android:layout_marginRight = "@dimen/margin_l"
+    android:layout_marginTop = "@dimen/margin_S"
+    android:animateLayoutChanges = "true"
+    tools:context = ".ui.main.MainActivity">
 
-    <RelativeLayout
-        style="@style/mm">
+    <RelativeLayout style = "@style/mm">
 
         <ImageView
-            android:id="@+id/main_image"
-            style="@style/ww"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/margin_S"
-            android:src="@drawable/ic_mercadolibre"
-            android:transitionName="@string/transition_mercadoLibre"/>
+            android:id = "@+id/main_image"
+            style = "@style/ww"
+            android:layout_centerHorizontal = "true"
+            android:layout_margin = "@dimen/margin_S"
+            android:src = "@drawable/ic_mercadolibre"
+            android:transitionName = "@string/transition_mercadoLibre" />
 
         <TextView
-            android:id="@+id/main_textPresentation"
-            style="@style/mw"
-            android:layout_below="@id/main_image"
-            android:layout_marginLeft="@dimen/margin_M"
-            android:layout_marginRight="@dimen/margin_M"
-            android:text="@string/msg_presentation"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+            android:id = "@+id/main_textPresentation"
+            style = "@style/mw"
+            android:layout_below = "@id/main_image"
+            android:layout_marginLeft = "@dimen/margin_M"
+            android:layout_marginRight = "@dimen/margin_M"
+            android:text = "@string/msg_presentation"
+            android:textAppearance = "@style/TextAppearance.AppCompat.Body1" />
 
         <ImageView
-            android:id="@+id/main_imageAmount"
-            style="@style/ww"
-            android:layout_alignBottom="@id/main_textInputAmount"
-            android:layout_below="@id/main_textPresentation"
-            android:src="@drawable/baseline_attach_money_black_24"
-            android:tint="@color/accent"/>
+            android:id = "@+id/main_imageAmount"
+            style = "@style/ww"
+            android:layout_alignBottom = "@id/main_textInputAmount"
+            android:layout_below = "@id/main_textPresentation"
+            android:src = "@drawable/baseline_attach_money_black_24"
+            android:tint = "@color/accent" />
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/main_textInputAmount"
-            style="@style/mw"
-            android:layout_below="@id/main_textPresentation"
-            android:layout_marginLeft="@dimen/margin_M"
-            android:layout_marginTop="@dimen/margin_M"
-            android:layout_toEndOf="@id/main_imageAmount">
+            android:id = "@+id/main_textInputAmount"
+            style = "@style/mw"
+            android:layout_below = "@id/main_textPresentation"
+            android:layout_marginLeft = "@dimen/margin_M"
+            android:layout_marginTop = "@dimen/margin_M"
+            android:layout_toEndOf = "@id/main_imageAmount">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/main_editTextAmount"
-                style="@style/mw"
-                android:hint="@string/text_enterValue"
-                android:inputType="number"
-                android:maxLength="7"
-                android:maxLines="1"/>
+                android:id = "@+id/main_editTextAmount"
+                style = "@style/mw"
+                android:hint = "@string/text_enterValue"
+                android:inputType = "number"
+                android:maxLength = "7"
+                android:maxLines = "1" />
 
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:id="@+id/main_btnPay"
-            style="@style/ww"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/main_textInputAmount"
-            android:background="@drawable/btn_selector_accent"
-            android:onClick="pay"
-            android:paddingLeft="@dimen/padding_M"
-            android:paddingRight="@dimen/padding_M"
-            android:text="@string/button_pagar"
-            android:textColor="@android:color/white"/>
+            android:id = "@+id/main_btnPay"
+            style = "@style/ww"
+            android:layout_alignParentRight = "true"
+            android:layout_below = "@id/main_textInputAmount"
+            android:background = "@drawable/btn_selector_accent"
+            android:onClick = "pay"
+            android:paddingLeft = "@dimen/padding_M"
+            android:paddingRight = "@dimen/padding_M"
+            android:text = "@string/button_pagar"
+            android:textColor = "@android:color/white" />
 
         <LinearLayout
-            android:id="@+id/main_layoutSummary"
-            style="@style/mm"
-            android:layout_below="@id/main_btnPay"
-            android:layout_marginTop="@dimen/margin_M"
-            android:orientation="vertical">
+            android:id = "@+id/main_layoutSummary"
+            style = "@style/mm"
+            android:layout_below = "@id/main_btnPay"
+            android:layout_marginTop = "@dimen/margin_M"
+            android:orientation = "vertical">
 
-            <RelativeLayout
-                style="@style/mw">
+            <RelativeLayout style = "@style/mw">
 
                 <View
-                    android:id="@+id/main_circle1"
-                    style="@style/circle"/>
+                    android:id = "@+id/main_circle1"
+                    style = "@style/circle" />
 
                 <TextView
-                    android:id="@+id/main_paymentText"
-                    style="@style/ww"
-                    android:layout_toEndOf="@id/main_circle1"
-                    android:text="@string/text_payment"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+                    android:id = "@+id/main_paymentText"
+                    style = "@style/ww"
+                    android:layout_toEndOf = "@id/main_circle1"
+                    android:text = "@string/text_payment"
+                    android:textAppearance = "@style/TextAppearance.AppCompat.Caption" />
 
                 <TextView
-                    android:id="@+id/main_paymentTextValue"
-                    style="@style/ww"
-                    android:layout_below="@id/main_paymentText"
-                    android:layout_marginLeft="@dimen/margin_XXl"
-                    android:text="@string/lorem_1word"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+                    android:id = "@+id/main_paymentTextValue"
+                    style = "@style/ww"
+                    android:layout_below = "@id/main_paymentText"
+                    android:layout_marginLeft = "@dimen/margin_XXl"
+                    android:text = "@string/lorem_1word"
+                    android:textAppearance = "@style/TextAppearance.AppCompat.Body2" />
 
                 <ImageView
-                    android:id="@+id/main_imagePayment"
-                    style="@style/ww"
-                    android:layout_height="@dimen/icon_Height_S"
-                    android:layout_below="@id/main_paymentText"
-                    android:layout_marginLeft="@dimen/margin_S"
-                    android:layout_toEndOf="@id/main_paymentTextValue"
-                    />
+                    android:id = "@+id/main_imagePayment"
+                    style = "@style/ww"
+                    android:layout_height = "@dimen/icon_Height_S"
+                    android:layout_below = "@id/main_paymentText"
+                    android:layout_marginLeft = "@dimen/margin_S"
+                    android:layout_toEndOf = "@id/main_paymentTextValue" />
 
             </RelativeLayout>
 
             <RelativeLayout
-                style="@style/mw"
-                android:layout_marginTop="@dimen/margin_l">
+                style = "@style/mw"
+                android:layout_marginTop = "@dimen/margin_l">
 
                 <View
-                    android:id="@+id/main_circle2"
-                    style="@style/circle"/>
+                    android:id = "@+id/main_circle2"
+                    style = "@style/circle" />
 
                 <TextView
-                    android:id="@+id/main_issuerText"
-                    style="@style/ww"
-                    android:layout_toEndOf="@id/main_circle2"
-                    android:text="@string/text_bank"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+                    android:id = "@+id/main_issuerText"
+                    style = "@style/ww"
+                    android:layout_toEndOf = "@id/main_circle2"
+                    android:text = "@string/text_bank"
+                    android:textAppearance = "@style/TextAppearance.AppCompat.Caption" />
 
                 <TextView
-                    android:id="@+id/main_issuerTextValue"
-                    style="@style/ww"
-                    android:layout_below="@id/main_issuerText"
-                    android:layout_marginLeft="@dimen/margin_XXl"
-                    android:text="@string/lorem_1word"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+                    android:id = "@+id/main_issuerTextValue"
+                    style = "@style/ww"
+                    android:layout_below = "@id/main_issuerText"
+                    android:layout_marginLeft = "@dimen/margin_XXl"
+                    android:text = "@string/lorem_1word"
+                    android:textAppearance = "@style/TextAppearance.AppCompat.Body2" />
 
                 <ImageView
-                    android:id="@+id/main_imageIssuer"
-                    style="@style/ww"
-                    android:layout_height="@dimen/icon_Height_S"
-                    android:layout_below="@id/main_issuerText"
-                    android:layout_marginLeft="@dimen/margin_S"
-                    android:layout_toEndOf="@id/main_issuerTextValue"
-                    />
+                    android:id = "@+id/main_imageIssuer"
+                    style = "@style/ww"
+                    android:layout_height = "@dimen/icon_Height_S"
+                    android:layout_below = "@id/main_issuerText"
+                    android:layout_marginLeft = "@dimen/margin_S"
+                    android:layout_toEndOf = "@id/main_issuerTextValue" />
 
             </RelativeLayout>
 
             <RelativeLayout
-                style="@style/mw"
-                android:layout_marginTop="@dimen/margin_l">
+                style = "@style/mw"
+                android:layout_marginTop = "@dimen/margin_l">
 
                 <View
-                    android:id="@+id/main_circle3"
-                    style="@style/circle"/>
+                    android:id = "@+id/main_circle3"
+                    style = "@style/circle" />
 
                 <TextView
-                    android:id="@+id/main_payerCostText"
-                    style="@style/ww"
-                    android:layout_toEndOf="@id/main_circle3"
-                    android:text="@string/text_installments"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+                    android:id = "@+id/main_payerCostText"
+                    style = "@style/ww"
+                    android:layout_toEndOf = "@id/main_circle3"
+                    android:text = "@string/text_installments"
+                    android:textAppearance = "@style/TextAppearance.AppCompat.Caption" />
 
                 <TextView
-                    android:id="@+id/main_payerCostTextValue"
-                    style="@style/ww"
-                    android:layout_below="@id/main_payerCostText"
-                    android:layout_marginLeft="@dimen/margin_XXl"
-                    android:text="@string/lorem_1word"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+                    android:id = "@+id/main_payerCostTextValue"
+                    style = "@style/ww"
+                    android:layout_below = "@id/main_payerCostText"
+                    android:layout_marginLeft = "@dimen/margin_XXl"
+                    android:text = "@string/lorem_1word"
+                    android:textAppearance = "@style/TextAppearance.AppCompat.Body2" />
 
             </RelativeLayout>
 

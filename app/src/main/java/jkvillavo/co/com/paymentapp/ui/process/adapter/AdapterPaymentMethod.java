@@ -18,14 +18,17 @@ import java.util.List;
 import jkvillavo.co.com.paymentapp.R;
 import jkvillavo.co.com.paymentapp.data.model.PaymentMethod;
 
+/**
+ * Adaptador encargado de mostrar los metodos de pago
+ */
 public class AdapterPaymentMethod extends RecyclerView.Adapter<AdapterPaymentMethod.PaymentMethodViewHolder> {
 
     private List<PaymentMethod> listPaymentMethods;
     private AdapterPaymentMethodListener mListener;
     private Fragment fragment;
 
-    public AdapterPaymentMethod(List<PaymentMethod> listPaymentMethods, AdapterPaymentMethodListener methodListener,
-                                Fragment fragment) {
+    public AdapterPaymentMethod ( List<PaymentMethod> listPaymentMethods, AdapterPaymentMethodListener methodListener,
+                                  Fragment fragment ) {
 
         this.listPaymentMethods = listPaymentMethods;
         this.mListener = methodListener;
@@ -34,47 +37,48 @@ public class AdapterPaymentMethod extends RecyclerView.Adapter<AdapterPaymentMet
 
     @NonNull
     @Override
-    public PaymentMethodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PaymentMethodViewHolder onCreateViewHolder ( @NonNull ViewGroup parent, int viewType ) {
 
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_paymentmethod, parent, false);
+        View itemView = LayoutInflater.from( parent.getContext() )
+                .inflate( R.layout.item_paymentmethod, parent, false );
 
-        return new PaymentMethodViewHolder(itemView);
+        return new PaymentMethodViewHolder( itemView );
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PaymentMethodViewHolder holder, int position) {
+    public void onBindViewHolder ( @NonNull PaymentMethodViewHolder holder, int position ) {
 
-        final PaymentMethod paymentMethod = listPaymentMethods.get(position);
-        holder.tvName.setText(paymentMethod.getName());
-        Glide.with(fragment).load(paymentMethod.getSecureThumbnail()).into(holder.imageView);
+        final PaymentMethod paymentMethod = listPaymentMethods.get( position );
+        holder.tvName.setText( paymentMethod.getName() );
+        Glide.with( fragment ).load( paymentMethod.getSecureThumbnail() ).into( holder.imageView );
 
-        if (paymentMethod.isSelected()) {
-            holder.relativeLayout.setBackgroundResource(R.drawable.shape_back_blueligth);
+        if ( paymentMethod.isSelected() ) {
+            holder.relativeLayout.setBackgroundResource( R.drawable.shape_back_blueligth );
         } else {
-            holder.relativeLayout.setBackgroundResource(0);
+            holder.relativeLayout.setBackgroundResource( 0 );
         }
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener( new View.OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick ( View v ) {
 
-                for (PaymentMethod payment : listPaymentMethods) {
-                    if (!payment.getId().equalsIgnoreCase(paymentMethod.getId())) {
-                        payment.setSelected(false);
+                for ( PaymentMethod payment : listPaymentMethods ) {
+                    if ( ! payment.getId().equalsIgnoreCase( paymentMethod.getId() ) ) {
+                        payment.setSelected( false );
                     }
                 }
-                paymentMethod.setSelected(!paymentMethod.isSelected());
-                mListener.onPaymentSelected(paymentMethod);
+                paymentMethod.setSelected( ! paymentMethod.isSelected() );
+                mListener.onPaymentSelected( paymentMethod );
 
             }
-        });
+        } );
 
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount () {
+
         return listPaymentMethods.size();
     }
 
@@ -85,20 +89,20 @@ public class AdapterPaymentMethod extends RecyclerView.Adapter<AdapterPaymentMet
         private RelativeLayout relativeLayout;
         private ImageView imageView;
 
-        public PaymentMethodViewHolder(View view) {
+        public PaymentMethodViewHolder ( View view ) {
 
-            super(view);
-            tvName = (TextView) view.findViewById(R.id.itemPaymentMethod_textViewName);
-            cardView = (CardView) view.findViewById(R.id.itemPaymentMethod_card);
-            relativeLayout = (RelativeLayout) view.findViewById(R.id.itemPaymentMethod_rl);
-            imageView = (ImageView) view.findViewById(R.id.itemPaymentMethod_image);
+            super( view );
+            tvName = ( TextView ) view.findViewById( R.id.itemPaymentMethod_textViewName );
+            cardView = ( CardView ) view.findViewById( R.id.itemPaymentMethod_card );
+            relativeLayout = ( RelativeLayout ) view.findViewById( R.id.itemPaymentMethod_rl );
+            imageView = ( ImageView ) view.findViewById( R.id.itemPaymentMethod_image );
 
         }
     }
 
     public interface AdapterPaymentMethodListener {
 
-        void onPaymentSelected(PaymentMethod paymentMethod);
+        void onPaymentSelected ( PaymentMethod paymentMethod );
 
     }
 

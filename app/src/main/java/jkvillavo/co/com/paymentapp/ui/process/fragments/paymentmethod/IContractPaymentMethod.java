@@ -8,34 +8,90 @@ public interface IContractPaymentMethod {
 
     interface View {
 
-        void hideProgress();
+        /**
+         * Solicita ocultar el progressBar
+         */
+        void hideProgress ();
 
-        void onFailure(Throwable t);
+        /**
+         * metodo para informar que el consumo del WS ha fallado
+         *
+         * @param t
+         *         throwable a mostrar
+         */
+        void onFailure ( Throwable t );
 
-        void showMessage(String msg);
+        /**
+         * Solicita mostrar un mensaje al usuario
+         *
+         * @param msg
+         *         mensaje a mostrar
+         */
+        void showMessage ( String msg );
 
-        void showPaymentMethods(List<PaymentMethod> methodList);
+        /**
+         * Muestra los medios de pago disponibles
+         *
+         * @param methodList
+         *         lista de metodos de pago
+         */
+        void showPaymentMethods ( List<PaymentMethod> methodList );
 
-        void showProgress();
+        /**
+         * solicita mostrar el progressBar
+         */
+        void showProgress ();
+
+        /**
+         * Solicita mostrar el snackBar de no conexion
+         */
+        void showSnackBarNetwork ();
     }
 
     interface Presenter {
 
-        void loadPaymentMethods();
+        /**
+         * Se encarga de la logica para cargar los medios de pago
+         */
+        void loadPaymentMethods ();
     }
 
     interface Model {
 
         interface OnFinishedListener {
 
-            void onFinished(List<PaymentMethod> methodList);
+            /**
+             * Metodo que se lanza al finalizar el llamado de un ws
+             *
+             * @param methodList
+             *         lista de medios de pago
+             */
+            void onFinished ( List<PaymentMethod> methodList );
 
-            void onMessage(String msg);
+            /**
+             * Metodo que se lanza cuando querremos informar por medio de un mensaje una situacion en el ws
+             *
+             * @param msg
+             *         mensaje a mostrar
+             */
+            void onMessage ( String msg );
 
-            void onFailure(Throwable t);
+            /**
+             * Metodo que se lanza cuando el ws falla
+             *
+             * @param t
+             *         throwable a manejar
+             */
+            void onFailure ( Throwable t );
         }
 
-        void loadPaymentMethods(OnFinishedListener onFinishedListener);
+        /**
+         * Se encarga de la consultar via ws de los metodos de pago
+         *
+         * @param onFinishedListener
+         *         listener para controlar los eventos
+         */
+        void loadPaymentMethods ( OnFinishedListener onFinishedListener );
     }
 
 }

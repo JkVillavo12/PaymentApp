@@ -9,23 +9,26 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
+/**
+ * Contiene los distintos métodos que usa la app del Api de MercadoPago
+ */
 public interface MercadoPagoApi {
 
-    @GET("payment_methods")
-    Call<List<PaymentMethod>> getPaymentMethods(
-            @Query("public_key") String publicKey);
+    @GET ( "payment_methods" )
+    Call<List<PaymentMethod>> getPaymentMethods (
+            @Query ( "public_key" ) String publicKey );
 
-    @GET("payment_methods/card_issuers")
-    Call<List<CardIssuer>> getCardIssuers(
-            @Query("public_key") String publicKey,
-            @Query("payment_method_id") String paymentMethodId);
+    @GET ( "payment_methods/card_issuers" )
+    Call<List<CardIssuer>> getCardIssuers (
+            @Query ( "public_key" ) String publicKey,
+            @Query ( "payment_method_id" ) String paymentMethodId );
 
-    @GET("payment_methods/installments")
-    Call<List<Installment>> getInstallment(
-            @Query("public_key") String publicKey,
-            @Query("amount") String amount,
-            @Query("payment_method_id") String paymentMethodId,
-            @Query("issuer.id") String issuerId);
+    @GET ( "payment_methods/installments" )
+    Call<List<Installment>> getInstallment (
+            @Query ( "public_key" ) String publicKey,
+            @Query ( "amount" ) String amount,
+            @Query ( "payment_method_id" ) String paymentMethodId,
+            @Query ( "issuer.id" ) String issuerId );
 
 
 }

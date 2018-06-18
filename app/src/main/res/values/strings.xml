@@ -25,6 +25,8 @@
     <string name="msg_notData">No hay información para mostrar</string>
     <string name="msg_errorBackend">Ha ocurrido un error en la consulta de la información.</string>
     <string name="msg_noInstallments">No se encontró información del método de pago y sus cuotas.</string>
+    <string name="msg_noInternet">Necesitas una conexión a internet.</string>
+    <string name="msg_configure">Configurar</string>
 
     <string name="lorem_1word">Lorem</string>
     <string name="lorem_15word">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod lectus et magna sollicitudin, eget.</string>
